@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { onMounted, shallowRef } from 'vue'
+import { onMounted, inject } from 'vue'
 import * as Cesium from 'cesium'
 import { transformCoordinateProj } from '@/utils/cesiumControl/coord-tool.ts'
+import { cesiumViewerKey } from '@/utils/symbol.ts'
 
-const viewer = shallowRef()
+const viewer = inject(cesiumViewerKey)!
 onMounted(() => {
   /* 配置token */
   Cesium.Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlN2E5ZmYzNS1lOGMyLTRkNDYtOTZhYy1jNzc5YWM2MThmMjMiLCJpZCI6MTI2NDE4LCJpYXQiOjE3MTU1NjM1ODd9.5A_CuWM7womhJ9zQFQbwh7UN7vMzAjxo87UZJ4WcnMs'
 
   /* 配置GeoJSON数据的坐标系 */
-  Cesium.GeoJsonDataSource.crsNames['urn:ogc:def:crs:EPSG::4490'] =
-    Cesium.GeoJsonDataSource.crsNames['EPSG:4490'] = transformCoordinateProj
+  Cesium.GeoJsonDataSource.crsNames['urn:ogc:def:crs:EPSG::4490'] = Cesium.GeoJsonDataSource.crsNames['EPSG:4490'] =
+    transformCoordinateProj
 
   /* 初始化Viewer */
   viewer.value = new Cesium.Viewer('map-3d-container', {
@@ -45,7 +46,8 @@ onMounted(() => {
       heading: 0.13786544233996167,
       pitch: -0.659093357347059,
       roll: 0
-    }
+    },
+    duration: 1
   })
 
   /* for debug */

@@ -1,13 +1,7 @@
 <template>
   <div class="login-box">
     <div>Website Name</div>
-    <el-form
-      ref="loginFormRef"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      label-width="80px"
-    >
+    <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form" label-width="80px">
       <el-form-item label="用户名" prop="username">
         <el-input v-model="loginForm.username" />
       </el-form-item>

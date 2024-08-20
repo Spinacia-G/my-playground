@@ -2,6 +2,10 @@
   margin-left: auto;
 }
 
+.smooth {
+  transition: all 0.2s ease;
+}
+
 .main-container {
   position: absolute;
   bottom: 0;
